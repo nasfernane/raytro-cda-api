@@ -15,7 +15,7 @@ console.log(DB);
 console.log(process.env.NODE_ENV);
 
 // connexion à la BDD
-mongoose.connext(DB, {
+mongoose.connect(DB, {
     // échappe certains warnings de dépréciation
     useNewUrlParser: true,
     useCreateIndex: true,
