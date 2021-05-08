@@ -1,12 +1,16 @@
 // modules
 const express = require('express');
 const feedbackController = require('../controllers/feedbackController');
+const userController = require('../controllers/userController');
 
 // création du routeur
 const router = express.Router();
 
 //// itinéraires
 //
+
+// rend la connexion obligatoire pour tous les itinéraires qui suivent
+router.use(userController.protect);
 
 // création
 router.post('/create', feedbackController.create);
