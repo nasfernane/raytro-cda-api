@@ -29,12 +29,12 @@ app.use(express.json({limit: '10kb'}));
 app.use(cookieParser());
 
 // routes
-app.get('', function (res, res) {
-    res.render('welcome');
-})
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/feedbacks', feedbackRouter);
+app.get('/', function (res, res) {
+    res.render('welcome');
+})
 
 // gestion des routes qui n'existent pas ?
 // app.all('*', (req, res, next) => {
