@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/feedbacks', feedbackRouter);
-app.get('/', function (res, res) {
+app.get('/', function (req, res) {
     res.render('welcome');
 })
 
