@@ -19,11 +19,11 @@ const feedbackSchema = new mongoose.Schema({
     }
 })
 
-// après chaque création de feedback, met à jour la dernière participation de l'utilisateur
+// avant chaque création de feedback, met à jour la dernière participation de l'utilisateur
 feedbackSchema.pre('save', async function (req, res, next) {
     console.log(req.user.id);
 
-    user = await User.findById(req.user.id);
+    user = await User.findById(req.user._id);
     user.lastFeedback = `${getWeek(new Date())}-${new Date().getFullYear()}`;
     await user.save();
 
