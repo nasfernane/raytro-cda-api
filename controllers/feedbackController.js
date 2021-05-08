@@ -9,6 +9,25 @@ const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const Feedback = require('../models/feedbackModel');
 
+// vérifie si l'utilisateur est admin et si il a participé aux feedbacks de la semaine en cours 
+exports.checkAccess = catchAsync(async (req, res, next) => {
+    // récupération de la semaine en cours
+    const currentWeek = getWeek(new Date());
+
+    // récupération de l'utilisateur connecté
+    const user = await User.findById(req.user.id)
+
+    // si l'utilisateur n'a pas participé cette semaine et si il n'est pas admin, refuse l'accès
+    if (user.lastFeedback !== currentWeek && user.role !== 'admin') {
+        return next(
+            new AppError(`Vous n'êtes pas autorisés à constulter ces feedbacks`, 400)
+        );
+    }
+
+    // sinon, fait suivre la requête
+    next();
+})
+
 // création d'un nouveau feedback
 exports.create = catchAsync(async (req, res, next) => {
     // récupère les informations dans le corps de la requête
@@ -44,16 +63,6 @@ exports.index = catchAsync(async (req, res, next) => {
 exports.currentWeek = catchAsync(async (req, res, next) => {
     // récupération de la semaine en cours
     const currentWeek = getWeek(new Date());
-
-    // récupération de l'utilisateur connecté
-    const user = await User.findById(req.user.id)
-    
-    // si l'utilisateur n'a pas participé cette semaine ou si il n'est pas admin, refuse accès
-    if (user.lastFeedback !== currentWeek || user.role !== 'admin') {
-        return next(
-            new AppError(`Vous n'êtes pas autorisés à constulter ces feedbacks`, 400)
-        );
-    }
 
     // récupération des documents
     const doc = await Feedback.find({ createdAt: currentWeek});
