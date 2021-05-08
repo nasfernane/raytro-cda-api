@@ -40,7 +40,10 @@ const userSchema = new mongoose.Schema({
             },
             message: `Vos mots de passe ne correspondent pas`
         },
-    },  
+    },
+    lastFeedback: {
+        type: String,
+    }
 })
 
 userSchema.pre('save', async function (next) {
