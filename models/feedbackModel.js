@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const getWeek = require('../utils/getWeek')
 
+const User = require('./userModel');
+
 
 const feedbackSchema = new mongoose.Schema({
     createdAt: {
@@ -20,15 +22,15 @@ const feedbackSchema = new mongoose.Schema({
 })
 
 // avant chaque création de feedback, met à jour la dernière participation de l'utilisateur
-feedbackSchema.pre('save', async function (req, res, next) {
-    console.log(req.user.id);
+// feedbackSchema.post('save', async function (req, res, next) {
+//     console.log(req.user.id);
 
-    user = await User.findById(req.user._id);
-    user.lastFeedback = `${getWeek(new Date())}-${new Date().getFullYear()}`;
-    await user.save();
+//     user = await User.findById(req.user._id);
+//     user.lastFeedback = `${getWeek(new Date())}-${new Date().getFullYear()}`;
+//     await user.save();
 
-    next();
-})
+//     next();
+// })
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 module.exports = Feedback;
