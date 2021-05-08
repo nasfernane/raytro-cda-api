@@ -10,10 +10,10 @@ const router = express.Router();
 //
 
 // rend la connexion obligatoire pour tous les itinéraires qui suivent
-router.use(userController.protect);
+// router.use(userController.protect);
 
 // création
-router.post('/create', feedbackController.create);
+router.post('/create', userController.protect, feedbackController.create);
 // récupération de tous les feedbacks
 router.get('/index', feedbackController.index);
 // récupération des feedbacks de la semaine en cours

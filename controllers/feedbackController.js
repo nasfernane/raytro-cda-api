@@ -14,6 +14,11 @@ exports.create = catchAsync(async (req, res, next) => {
     // récupère les informations dans le corps de la requête
     const doc = await Feedback.create(req.body);
 
+    // mise à jour de la dernière participation de l'utilisateur aux feedbacks
+    await User.findByIdAndUpdate(req.user.id, {
+        lastFeedback: `${getWeek(new Date())}-${new Date().getFullYear()}`,
+    });
+
     // retourne le document créé au client
     res.status(201).json({
         status: 'success',

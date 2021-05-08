@@ -16,21 +16,12 @@ const feedbackSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Le feedback doit avoir une catégorie'],
-        enum: ['like', 'unlike'],
-        message: 'Le feedback doit être de type like ou unlike',
+        enum: ['like', 'dislike'],
+        message: 'Le feedback doit être de type like ou dislike',
     }
 })
 
-// avant chaque création de feedback, met à jour la dernière participation de l'utilisateur
-// feedbackSchema.post('save', async function (req, res, next) {
-//     console.log(req.user.id);
 
-//     user = await User.findById(req.user._id);
-//     user.lastFeedback = `${getWeek(new Date())}-${new Date().getFullYear()}`;
-//     await user.save();
-
-//     next();
-// })
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 module.exports = Feedback;
