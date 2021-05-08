@@ -47,7 +47,7 @@ userSchema.pre('save', async function (next) {
     // hashage du mot de passe
     this.password = await bcrypt.hash(this.password, 12);
 
-    // le mot de passe de confirmation n'ext plus nécessaire
+    // le mot de passe de confirmation n'es t plus nécessaire
     this.passwordConfirm = undefined;
 
     next();

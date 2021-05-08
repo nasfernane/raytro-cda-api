@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const getWeek = require('../utils/getWeek')
 
 const feedbackSchema = new mongoose.Schema({
     createdAt: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: `${getWeek(new Date())}-${new Date().getFullYear()}`,
     },
     content: {
         type: String,
@@ -16,7 +17,6 @@ const feedbackSchema = new mongoose.Schema({
         message: 'Le feedback doit être de type like ou unlike',
     }
 })
-
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 module.exports = Feedback;
