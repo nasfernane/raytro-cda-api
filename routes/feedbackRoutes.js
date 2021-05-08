@@ -1,7 +1,7 @@
 // modules
 const express = require('express');
 const feedbackController = require('../controllers/feedbackController');
-const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 // création du routeur
 const router = express.Router();
@@ -10,10 +10,10 @@ const router = express.Router();
 //
 
 // rend la connexion obligatoire pour tous les itinéraires qui suivent
-// router.use(userController.protect);
+router.use(authController.protect);
 
 // création
-router.post('/create', userController.protect, feedbackController.create);
+router.post('/create', authController.protect, feedbackController.create);
 // récupération de tous les feedbacks
 router.get('/index', feedbackController.index);
 // récupération des feedbacks de la semaine en cours

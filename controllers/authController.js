@@ -1,6 +1,6 @@
 // modules
 const catchAsync = require('../utils/catchAsync');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 // récupère la méthode promisify du module built-in Util de Node
 const { promisify } = require('util');
@@ -107,6 +107,7 @@ exports.logout = (req, res) => {
     res.status(200).json({ status: 'success' });
 }
 
+// vérifie que l'utilisateur est connecté
 exports.protect = catchAsync(async (req, res, next) => {
     // 1) récupération du token, vérification qu'il existe
     let token;
@@ -143,5 +144,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 })
 
+// limite l'accès à certains routes selon le rôle utilisateur
+exports.restrictTo = role => (req, res, next) => {
+    if (role !== req.user.role) {
+        // return et transmet l'erreur 403 (forbidden)
+        return next(new AppError(`Vous n'êtes pas autorisé(e) à effectuer cette action.`, 403));
+    }
 
-
+    next();
+};

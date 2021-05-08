@@ -1,6 +1,6 @@
 // modules
 const express = require('express');
-const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 
 // création du routeur
@@ -10,11 +10,11 @@ const router = express.Router();
 //
 
 // création de compte
-router.post('/signup', userController.signup);
+router.post('/signup', authController.signup);
 // connexion
-router.post('/login', userController.login);
+router.post('/login', authController.login);
 // deconnexion
-router.post('/logout', userController.logout);
+router.post('/logout', authController.logout);
 
 // exporte le module pour app.js
 module.exports = router;

@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 
 
 // routeurs
-const userRouter = require('./routes/userRoutes.js');
+const authRouter = require('./routes/authRoutes.js');
+const adminRouter = require('./routes/adminRoutes.js');
 const feedbackRouter = require('./routes/feedbackRoutes.js');
 
 // création de l'app
@@ -23,7 +24,8 @@ app.use(express.json({limit: '10kb'}));
 app.use(cookieParser());
 
 // routes
-app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/feedbacks', feedbackRouter);
 
 // gestion des routes qui n'existent pas ?
