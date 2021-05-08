@@ -19,6 +19,9 @@ app.set('view engine', 'pug');
 // définit le chemin d'accès des vues avec path.join pour récupérer le bon dossier quel que soit l'endroit d'où est exécuté l'application. Evite également certains bugs liés à la présence ou non des slashs dans l'url.
 app.set('views', path.join(__dirname, 'views'));
 
+// inclusion des fichiers statiques
+app.use(express.static(path.join(__dirname, '/public')));
+
 // définition des headers http
 app.use(helmet({ constentSecurityPolicy: false }));
 

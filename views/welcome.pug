@@ -1,9 +1,41 @@
+mixin route(description, method, endpoint)
+    .route
+        p.route__description 
+            span.dot •
+            span= description
+        p.route__title
+            img.arrow(src='/img/right-arrow.png')
+            span.method= method 
+            span.endpoint= endpoint
+
 doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet' href='../sass/style.css')
         title Document
     body 
-        p Hello !
+        h1 Raytro App API -- Version Node.js/MongoDB
+        main
+
+            section 
+                h2 Routes d'authentification
+                +route('Création compte utilisateur', 'POST', '/auth/signup')
+                +route('Connexion', 'POST', '/auth/login')
+                +route('Déconnexion', 'POST', '/auth/logout')
+
+            section
+                h2 Routes des feedbacks
+                p.info Participation aux feedbacks de la semaine courante requise, ou connexion en tant qu'administrateur
+                +route('Ajout nouveau feedback', 'POST', '/feedbacks/create')
+                +route('Tous les feedbacks', 'GET', '/feedbacks/index')
+                +route('Feedbacks de la semaine en cours', 'GET', '/feedbacks/currentweek')
+                +route('Feedbacks semaine spécifique', 'GET', '/feedbacks/week/:week')
+
+            section
+                h2 Routes administrateur
+                p.info Connexion en tant que rôle administrateur requise 
+                +route('Voir participants de la semaine', 'GET', '/admin/contribution')
+                        
