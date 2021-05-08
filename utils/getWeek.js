@@ -9,5 +9,5 @@ module.exports = (date) => {
     // Calcule le numéro de semaine
     const weekNumber = Math.ceil(( ( (date - yearStart) / 86400000) + 1)/7);
 
-    return weekNumber;
+    return `${weekNumber}-${date.getFullYear()}`;
 };

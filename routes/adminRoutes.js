@@ -10,7 +10,7 @@ const router = express.Router();
 //// itinéraires
 //
 
-// rend la connexion obligatoire pour tous les itinéraires qui suivent
+// rend la connexion obligatoire en role administrateur pour tous les itinéraires qui suivent
 router.use(authController.protect);
 router.use(authController.restrictTo('admin'));
 

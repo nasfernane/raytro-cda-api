@@ -16,7 +16,7 @@ exports.create = catchAsync(async (req, res, next) => {
 
     // mise à jour de la dernière participation de l'utilisateur aux feedbacks
     await User.findByIdAndUpdate(req.user.id, {
-        lastFeedback: `${getWeek(new Date())}-${new Date().getFullYear()}`,
+        lastFeedback: getWeek(new Date()),
     });
 
     // retourne le document créé au client
@@ -42,8 +42,19 @@ exports.index = catchAsync(async (req, res, next) => {
 
 // récupération des feedbacks de la semaine en cours
 exports.currentWeek = catchAsync(async (req, res, next) => {
-    // calcul de la semaine en cours
-    const currentWeek = `${getWeek(new Date())}-${new Date().getFullYear()}`
+    // récupération de la semaine en cours
+    const currentWeek = getWeek(new Date());
+
+    // récupération de l'utilisateur connecté
+    const user = await User.findById(req.user.id)
+    
+    // si l'utilisateur n'a pas participé cette semaine ou si il n'est pas admin, refuse accès
+    if (user.lastFeedback !== currentWeek || user.role !== 'admin') {
+        return next(
+            new AppError(`Vous n'êtes pas autorisés à constulter ces feedbacks`, 400)
+        );
+    }
+
     // récupération des documents
     const doc = await Feedback.find({ createdAt: currentWeek});
 
