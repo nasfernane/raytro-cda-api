@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/authRoutes.js');
 const adminRouter = require('./routes/adminRoutes.js');
 const feedbackRouter = require('./routes/feedbackRoutes.js');
+const AppError = require('./utils/appError.js');
 
 // création de l'app
 const app = express();
@@ -40,8 +41,8 @@ app.get('/', function (req, res) {
 })
 
 // gestion des routes qui n'existent pas ?
-// app.all('*', (req, res, next) => {
-    
-// })
+app.all('*', (req, res, next) => {
+    next(new AppError(`Impossible de trouver ${req.originalUrl} sur ce serveur`))
+})
 
 module.exports = app;
