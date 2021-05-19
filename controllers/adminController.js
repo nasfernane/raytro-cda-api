@@ -17,6 +17,7 @@ exports.getWeekContribution = catchAsync(async (req, res, next) => {
     // cherche tous les utilisateurs ayant contribué cette semaine
     const users = await User.find({lastFeedback: currentWeek});
     
+    // réponse au client
     res.status(201).json({
         status: 'success', 
         data: {

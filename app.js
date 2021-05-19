@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/authRoutes.js');
 const adminRouter = require('./routes/adminRoutes.js');
 const feedbackRouter = require('./routes/feedbackRoutes.js');
+const AppError = require('./utils/appError.js');
 
 // création de l'app
 const app = express();
@@ -25,9 +26,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 // définition des headers http
 app.use(helmet({ constentSecurityPolicy: false }));
 
-// ajout pour requête à l'api depuis l'applic
-const cors = require('cors');
-app.use(cors())
 
 // middleware qui compresse les réponses aux clients (HTML ou JSON)
 app.use(compression());
@@ -44,8 +42,8 @@ app.get('/', function (req, res) {
 })
 
 // gestion des routes qui n'existent pas ?
-// app.all('*', (req, res, next) => {
-    
-// })
+app.all('*', (req, res, next) => {
+    next(new AppError(`Impossible de trouver ${req.originalUrl} sur ce serveur`))
+})
 
 module.exports = app;
