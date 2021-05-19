@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 // définition des headers http
 app.use(helmet({ constentSecurityPolicy: false }));
 
+// ajout pour requête à l'api depuis l'appli front locale
+const cors = require('cors');
+app.use(cors())
+
 
 // middleware qui compresse les réponses aux clients (HTML ou JSON)
 app.use(compression());
