@@ -4,7 +4,7 @@ const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
-
+const cors = require('cors');
 
 // routeurs
 const authRouter = require('./routes/authRoutes.js');
@@ -15,6 +15,8 @@ const AppError = require('./utils/appError.js');
 // création de l'app
 const app = express();
 
+
+
 // définit pug comme moteur de templating sur Express
 app.set('view engine', 'pug');
 // définit le chemin d'accès des vues avec path.join pour récupérer le bon dossier quel que soit l'endroit d'où est exécuté l'application. Evite également certains bugs liés à la présence ou non des slashs dans l'url.
@@ -24,6 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
+app.options('*', cors())
 app.use(helmet({ 
     constentSecurityPolicy: false,
 
