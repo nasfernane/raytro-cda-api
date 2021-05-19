@@ -26,7 +26,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
-app.options('*', cors())
+
+const corsOptions = {
+    origin : true,
+}
+app.use(cors(corsOptions));
 app.use(helmet({ 
     constentSecurityPolicy: false,
 
