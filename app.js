@@ -24,10 +24,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
-// app.use(helmet({ 
-//     constentSecurityPolicy: false,
+app.use(helmet({ 
+    constentSecurityPolicy: false,
 
-//  }));
+ }));
 
 
 // middleware qui compresse les réponses aux clients (HTML ou JSON)
