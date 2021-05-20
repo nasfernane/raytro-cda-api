@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
 const corsOptions = {
-    origin : '*',
+    origin : true,
     credentials: true
 }
 app.use(cors(corsOptions));
