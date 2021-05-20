@@ -32,7 +32,7 @@ const createSendToken = (user, statusCode, res) => {
     // option secure seulement en mode production
     // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     // envoie du cookie
-    res.cookie('jwt', token, cookieOptions);
+    res.cookie('jwt', token);
 
     // enlève le mdp de la réponse à l'utilisateur
     user.password = undefined;
