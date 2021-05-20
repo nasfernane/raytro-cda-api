@@ -10,7 +10,7 @@ const router = express.Router();
 //
 
 // rend la connexion obligatoire pour tous les itinéraires qui suivent
-router.use(authController.protect);
+// router.use(authController.protect);
 
 // création
 router.post('/create', authController.protect, feedbackController.create);
