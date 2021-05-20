@@ -26,32 +26,30 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
-// const corsOptions = {
-//     origin : ['http://localhost:4200'],
-//     optionsSuccessStatus: 200,
-//     credentials: true,
-// }
-
-// app.use(cors(corsOptions));
-
-// app.use(helmet({ 
-//     constentSecurityPolicy: false,
-//  }));
-
-cors: {
-    origin: ["http://localhost:4200/","http://localhost:4200"]
+const corsOptions = {
+    origin : ['http://localhost:4200'],
+    optionsSuccessStatus: 200,
+    credentials: true,
 }
 
+app.use(cors(corsOptions));
 
+app.use(helmet({ 
+    constentSecurityPolicy: false,
+ }));
 
-app.all('*', function(req, res, next) {
-    let origin = req.headers.origin;
-    if(cors.origin.indexOf(origin) >= 0){
-        res.header("Access-Control-Allow-Origin", origin);
-    }         
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// cors: {
+//     origin: ["http://localhost:4200/","http://localhost:4200"]
+// }
+
+// app.all('*', function(req, res, next) {
+//     let origin = req.headers.origin;
+//     if(cors.origin.indexOf(origin) >= 0){
+//         res.header("Access-Control-Allow-Origin", origin);
+//     }         
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 
 // middleware qui compresse les réponses aux clients (HTML ou JSON)
