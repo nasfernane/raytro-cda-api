@@ -13,7 +13,7 @@ const router = express.Router();
 // router.use(authController.protect);
 
 // création
-router.post('/create', authController.protect, feedbackController.create);
+router.post('/create', feedbackController.create);
 // rend obligatoire la participation à la semaine en cours ou la connexion en tant qu'admin pour accéder aux prochains middlewares
 // router.use(feedbackController.checkAccess);
 // récupération de tous les feedbacks
