@@ -34,9 +34,9 @@ exports.create = catchAsync(async (req, res, next) => {
     const doc = await Feedback.create(req.body);
 
     // mise à jour de la dernière participation de l'utilisateur aux feedbacks
-    await User.findByIdAndUpdate(req.user.id, {
-        lastFeedback: getWeek(new Date()),
-    });
+    // await User.findByIdAndUpdate(req.user.id, {
+    //     lastFeedback: getWeek(new Date()),
+    // });
 
     // rréponse au client
     res.status(201).json({
