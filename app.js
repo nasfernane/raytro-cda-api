@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // définition des headers http
 const corsOptions = {
     origin : true,
-    // credentials: true
+    credentials: true
 }
 app.use(cors(corsOptions));
 
@@ -38,7 +38,7 @@ app.use(helmet({
  }));
 
 
-// middleware qui compresse les réponses aux clients (HTML ou JSON)g
+// middleware qui compresse les réponses aux clients (HTML ou JSON)
 app.use(compression());
 
 app.use(express.json({limit: '10kb'}));
