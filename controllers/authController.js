@@ -26,7 +26,7 @@ const createSendToken = (user, statusCode, res) => {
         // expire dans maintenant + date d'expiration
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
         httpOnly: false,
-        SameSite: None,
+        // SameSite: None,
     }
 
     // option secure seulement en mode production
