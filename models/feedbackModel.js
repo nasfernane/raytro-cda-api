@@ -7,7 +7,7 @@ const User = require('./userModel');
 const feedbackSchema = new mongoose.Schema({
     createdAt: {
         type: String,
-        default: `${getWeek(new Date())}-${new Date().getFullYear()}`,
+        default: getWeek(new Date()),
     },
     content: {
         type: String,
