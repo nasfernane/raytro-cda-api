@@ -10,6 +10,7 @@ const AppError = require('../utils/appError');
 
 // modèles
 const User = require('../models/userModel');
+const { NONAME } = require('dns');
 
 // génère le token d'authentification
 const signToken = id => 
@@ -25,10 +26,11 @@ const createSendToken = (user, statusCode, res) => {
         // expire dans maintenant + date d'expiration
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
         httpOnly: false,
+        SameSite: None,
     }
 
     // option secure seulement en mode production
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
     // envoie du cookie
     res.cookie('jwt', token, cookieOptions);
 
