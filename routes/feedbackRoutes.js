@@ -15,7 +15,7 @@ const router = express.Router();
 // création
 router.post('/create', authController.protect, feedbackController.create);
 // rend obligatoire la participation à la semaine en cours ou la connexion en tant qu'admin pour accéder aux prochains middlewares
-router.use(feedbackController.checkAccess);
+// router.use(feedbackController.checkAccess);
 // récupération de tous les feedbacks
 router.get('/index', feedbackController.index);
 // récupération des feedbacks de la semaine en cours
