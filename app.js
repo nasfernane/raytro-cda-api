@@ -26,10 +26,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
-
 const corsOptions = {
     origin : ['http://localhost:4200'],
     credentials: true,
+    SameSite: 'None',
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }
 
 app.use(cors(corsOptions));
