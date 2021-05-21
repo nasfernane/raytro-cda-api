@@ -27,7 +27,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // définition des headers http
 
-// définition des headers http
 const corsOptions = {
     origin : ['http://localhost:4200'],
     credentials: true,
